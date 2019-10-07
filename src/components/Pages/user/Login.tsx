@@ -3,8 +3,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { WithStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
-import { authStore } from '../../stores/AuthStore';
-import { history } from '../history';
+import { authStore } from '../../../stores/AuthStore';
+import { history } from '../../history';
 import { Button, Input } from 'antd';
 
 const style = (theme: Theme) => createStyles({
@@ -148,9 +148,9 @@ class Login extends Component<Props, State> {
                 }}>
 
 
-                    <Input onChange={(e) => { this.handleEmailChange(e) }} placeholder="E-Mail" />
+                    <Input style={{ marginBottom: '20px' }} onChange={(e) => { this.handleEmailChange(e) }} placeholder="E-Mail" />
 
-                    <Input.Password onChange={(e) => { this.handleChange(e) }} placeholder="Password" />
+                    <Input.Password style={{ marginBottom: '20px' }} onChange={(e) => { this.handleChange(e) }} placeholder="Password" />
 
 
                     <div style={{
@@ -161,7 +161,7 @@ class Login extends Component<Props, State> {
                         marginTop: '20px'
                     }}>
                         <Button onClick={this.handleLogin} color="secondary"><strong>Login</strong></Button>
-                        <Button type="link" href="/user/register">Don't have an Account?</Button>
+                        <Button type="link" href="/user/register">Don't have an account?</Button>
                     </div>
                 </div>
             </div>

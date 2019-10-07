@@ -14,7 +14,6 @@ const hydrate = create({
 });
 hydrate("authStore", authStore).then(() => {
     authStore.rehydrated = true;
-    console.error(666, authStore.authToken);
 }).catch((error) => {
     console.error(error);
 });

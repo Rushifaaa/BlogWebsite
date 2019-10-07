@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Affix, Button, Menu, Icon } from 'antd';
 import { MenuTheme } from 'antd/lib/menu/MenuContext';
 import { history } from '../history';
+import { authStore } from '../../stores/AuthStore';
 
 const style = () => createStyles({
 
@@ -21,9 +22,19 @@ interface State {
     themeMode: string;
     current: any;
     iconsTheme: 'outlined' | 'filled';
+    verified: boolean;
 }
 
 class Navbar extends Component<Props, State> {
+
+    componentDidMount() {
+
+    }
+
+    componentDidUpdate() {
+
+    }
+
     classes = this.props.classes;
 
     constructor(props: Props) {
@@ -33,7 +44,24 @@ class Navbar extends Component<Props, State> {
             test: 0,
             themeMode: 'dark',
             current: 'home',
-            iconsTheme: 'filled'
+            iconsTheme: 'filled',
+            verified: false,
+        }
+    }
+
+    verifyToken = async () => {
+        const response = await fetch('http://localhost:8000/api/v1/user/token/auth', {
+            method: 'POST',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                authorization: authStore.authToken,
+            }
+        });
+
+        if (response.status === 200) {
+            this.setState({ verified: true });
+        } else {
+            this.setState({ verified: false });
         }
     }
 
@@ -72,11 +100,6 @@ class Navbar extends Component<Props, State> {
                                 <span>About</span>
                             </Menu.Item>
 
-                            <Button type="link" onClick={this.changeTheme}>
-                                <Icon type="bulb" />
-                                <span>Mode</span>
-                            </Button>
-
                             <SubMenu style={{
                                 position: 'absolute',
                                 right: 0,
@@ -86,16 +109,31 @@ class Navbar extends Component<Props, State> {
                                     User
                                 </span>
                             }>
-                                <Menu.ItemGroup>
-                                    <Menu.Item onClick={() => history.push('/user/register')} key="register">
-                                        <Icon type="user-add" />
-                                        <span>Register</span>
-                                    </Menu.Item>
-                                    <Menu.Item onClick={() => history.push('/user/login')} key="login">
-                                        <Icon type="key" />
-                                        <span>Login</span>
-                                    </Menu.Item>
-                                </Menu.ItemGroup>
+                                {this.state.verified ?
+                                    //TODO: split in components
+                                    <Menu.ItemGroup>
+                                        <Menu.Item onClick={() => history.push('/user/profile')} key="login">
+                                            <Icon type="user" />
+                                            <span>Account</span>
+                                        </Menu.Item>
+                                        <Menu.Item onClick={() => history.push('/user/settings')} key="register">
+                                            <Icon type="setting" />
+                                            <span>Settings</span>
+                                        </Menu.Item>
+
+                                    </Menu.ItemGroup>
+                                    :
+                                    <Menu.ItemGroup>
+                                        <Menu.Item onClick={() => history.push('/user/register')} key="register">
+                                            <Icon type="user-add" />
+                                            <span>Register</span>
+                                        </Menu.Item>
+                                        <Menu.Item onClick={() => history.push('/user/login')} key="login">
+                                            <Icon type="key" />
+                                            <span>Login</span>
+                                        </Menu.Item>
+                                    </Menu.ItemGroup>
+                                }
                             </SubMenu>
                         </Menu>
                     </Affix>

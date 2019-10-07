@@ -3,7 +3,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { WithStyles } from '@material-ui/styles';
 import React, { Component } from 'react';
-import { history } from '../history';
+import { history } from '../../history';
 import { Input, Button } from 'antd';
 
 
@@ -111,11 +111,11 @@ class Register extends Component<Props, State> {
                 }}>
 
 
-                    <Input onChange={(e) => { this.handleUsernameChange(e) }} placeholder="Username" />
+                    <Input style={{ marginBottom: '20px' }} onChange={(e) => { this.handleUsernameChange(e) }} placeholder="Username" />
 
-                    <Input onChange={(e) => { this.handleEmailChange(e) }} placeholder="E-Mail" />
+                    <Input style={{ marginBottom: '20px' }} onChange={(e) => { this.handleEmailChange(e) }} placeholder="E-Mail" />
 
-                    <Input.Password onChange={(e) => { this.handleChange(e) }} placeholder="Password" />
+                    <Input.Password style={{ marginBottom: '20px' }} onChange={(e) => { this.handleChange(e) }} placeholder="Password" />
 
 
 
@@ -128,7 +128,7 @@ class Register extends Component<Props, State> {
                         marginTop: '20px'
                     }}>
                         <Button onClick={this.handleRegister} color="secondary"><strong>Register</strong></Button>
-                        <Button type="link" href="/user/login">Already have a account?</Button>
+                        <Button type="link" href="/user/login">Already have an account?</Button>
                     </div>
 
                 </div>

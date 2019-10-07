@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Router } from "react-router-dom";
-import Register from './components/Pages/Register';
-import Login from './components/Pages/Login';
+import Register from './components/Pages/user/Register';
+import Login from './components/Pages/user/Login';
 import Home from './components/Pages/Home';
 import { PrivateRoute } from './components/PrivateRoute';
 import SecretSite from './components/Pages/SecretSite';
